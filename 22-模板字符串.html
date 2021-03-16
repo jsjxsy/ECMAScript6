@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>ES6模板字符串</title>
+</head>
+<body>
+<script>
+let obj = {name: 'wangzhan', age: '23'}
+let str = `我的名字是：${obj.name},我今年年龄是${obj.age}.`
+console.log(str)
+
+
+const n = `我
+是
+谁`
+console.log(n)
+
+// ES6
+function Price (strings, type) { // strings是一个数组，代表字符串的片段，他被调用者里面的${}折断
+    const retailPrice = 20
+    const wholeSalePrice = 16
+    let showTxt = ''
+    let s1 = strings[0]
+    if (type === 'retail') {
+        showTxt = `购买的零售价是${retailPrice}`
+    } else {
+        showTxt = `购买的批发价是${wholeSalePrice}`
+    }
+    return `${s1}${showTxt}`
+}
+let showTxt2 = Price`您此次的${'retail'}hahha`
+console.log(showTxt2) // ->您此次的购买的零售价是20
+
+</script>
+</body>
+</html>
