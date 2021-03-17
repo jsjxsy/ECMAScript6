@@ -3,6 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>WeekMap</title>
+    <!-- WeekMap与Map的区别是，存储的健值必须是对象数据类型 -->
+    <!-- Week没有size属性，不能遍历，没法获取元素 -->
+    <script>
+    class Person {
+        constructor(name, age) {
+            this.name = name
+            this.age = age
+        }
+
+        toString() {
+            return `name: ${this.name} age: ${this.age}`
+        }
+    }
+
+    const weakMap = new WeakMap()
+    weakMap.set(new Person("li si",12), "aaaa")
+    //weakMap.set("zhang san", "aaaa")//error
+    console.log(weakMap)
+
+    </script>
 </head>
 <body>
 

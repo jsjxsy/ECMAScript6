@@ -8,33 +8,73 @@
 </head>
 <body>
 	<script>
-		// const s = new Set(["a","b","c"]);
+
+		// const b = [1, 2, 3]
+		// const a = new Set(b);
+		// a.add("1")
+		// a.add(true)
+		// console.log(a)
+
+
+		const s = new Set(["a","b","c"]);
 		// console.log(s.size);
 		// console.log(s)
+
 		// s.add( 1 ).add( 2 ).add( 1 );
         // console.log(s)
 		// s.add( NaN ).add( NaN )
 
 		// var res = s.delete( "b" );
+		// console.log(res)
 		// var res = s.delete( "z" );
-
+		// console.log(res)
 		// console.log(s.has("a"))
 		// console.log(s.has("x"))
 
-		// s.clear();
-
+		//s.clear();
 		// s.forEach( function(item,index,set){
 		// 	console.log( item,index,set )
+		// 	console.log(`index=${index}`)
 		// } )
 
-		// var keys = s.keys();
-		// // console.log( keys );
+		// const arr = [1,2,3]
+		// arr.forEach(function(item, index, set){
+		// 	console.log("index"+index)
+		// })
+
+		var keys = s.keys();
+		 console.log( keys );
 		// console.log( keys.next() )
 		// console.log( keys.next() )
 		// console.log( keys.next() )
 		// console.log( keys.next() )
 
+        class Person {
+            constructor(name, age) {
+                this.name = name
+                this.age = age
+            }
+            toString(){
+             return `name: ${this.name} age: ${this.age}`
+            }
+        }
+        const set = new Set([new Person("li si", 12),
+            new Person("zhang san", 24),
+            new Person("wang wu", 60)])
+        set.add(new Person("li si",70))
+        console.log(set)
+        const keys2 = set.keys();
+        const entities2 = set.entries();
+        for(let item of keys2){
+            console.log(item.toString())
+        }
+        for(let item of entities2){
+            console.log(item.toString())
+        }
+
+
 		// var values = s.values();
+		// console.log(values)
 		// console.log( values.next() )
 		// console.log( values.next() )
 		// console.log( values.next() )

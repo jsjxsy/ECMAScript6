@@ -3,8 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>WeekSet</title>
+    <!-- WeekSet与Set的区别是，存储的数据必须是对象数据类型 -->
+    <!-- Week没有size属性，不能遍历，没法获取元素 -->
+    <script>
+    class Person {
+        constructor(name, age) {
+            this.name = name
+            this.age = age
+        }
+
+        toString() {
+            return `name: ${this.name} age: ${this.age}`
+        }
+    }
+
+    const set = new WeakSet([new Person('li si', 12),
+        new Person('zhang san', 24),
+        new Person('wang wu', 60)])
+    console.log(set)
+    console.log(set.add(new Person('li si', 70)))
+
+    </script>
 </head>
 <body>
-<!-- 与Set的区别是，存储的数据必须是对象数据类型 -->
 </body>
 </html>
