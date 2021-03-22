@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RegExp</title>
+</head>
+<body>
+<script language="JavaScript">
+const s = 'aaa_aa_a'
+const r1 = /a+/g
+const r2 = /a+/y
+// 第一次全局匹配  [没区别]
+console.log(r1.exec(s)) // ->["aaa", index: 0, input: "aaa_aa_a", groups: undefined]
+console.log(r2.exec(s)) // ->["aaa", index: 0, input: "aaa_aa_a", groups: undefined]
+// 第二次全局匹配  [有区别]
+// 第二次是从 _aa_a 开始匹配
+console.log(r1.exec(s)) // ->["aa", index: 4, input: "aaa_aa_a", groups: undefined]
+console.log(r2.exec(s)) // ->null      很明显，对于修饰符，开始的 _aa_a 第一位并不满足/a+/这个正则，看出来y修饰符是要连续的全局匹配才行！
+// sticky 目的，解决全局连续匹配的问题
+console.log(r1.exec(s)) //到最后
+console.log(r2.exec(s)) //y又从零开始
+
+
+// 例如现在有一个4字节的单个字符
+// 𠮷
+// UTF-16(hex): 0xD842 0xDFB7 (d842dfb7)  四个字节
+// 正则即 \uD842\uDFB7
+let s2 = '\uD842\uDFB7'//'𠮷'
+// ES5 这样是有问题的
+console.log(/^\uD842/.test(s2)) // ->true
+// ES6
+console.log(/^\uD842/u.test(s2)) // ->false
+
+console.log(/𠮷{2}/.test('𠮷𠮷')) // ->false   [这样是有问题的]
+console.log(/𠮷{2}/u.test('𠮷𠮷')) // ->true   [加了u修饰符之后，这样就没问题了]
+
+
+
+console.log(/[a-z]/i.test('\u212A')) // ->false
+// 现在，你不需要知道\u212A 这个码点对应什么字符，现在明显的问题是，这个正则识别不了大写A，即使用了i，也识别不了
+// ES6 加上u后正常识别A
+console.log(/[a-z]/iu.test('\u212A')) // ->true
+
+</script>
+</body>
+</html>
