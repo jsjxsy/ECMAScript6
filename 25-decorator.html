@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>decorator</title>
+    <script>
+    // class Person {
+    //     @readonly
+    //     // readonly(Person.prototype, 'name', descriptor);
+    //     // 类似于
+    //     // Object.defineProperty(Person.prototype, 'name', descriptor);
+    //     name() { return `${this.name}` }
+    // }
+    // console.log(new Person().name())
+    @testDecorator
+    class ClassA {
+    }
+
+    function testDecorator(target) {
+        target.addedParam = "I am decorator";
+    }
+
+    console.log(ClassA.addedParam);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -21,7 +21,7 @@
 	<script>
 		// function move( obj,attr,target,duration,callback ){
 		// 	var b = parseInt(getComputedStyle(obj)[attr]);
-		// 	var c = target - b; 
+		// 	var c = target - b;
 		// 	var d = duration;
 		// 	var temp = new Date().getTime();
 		// 	var timer = setInterval( function(){
@@ -37,7 +37,7 @@
 		// 		}
 		// 	},20 )
 		// }
-		var box = document.getElementById( 'box' );
+		const box = document.getElementById( 'box' );
 		// move( box,"width",200,500,()=>{
 		// 	move( box,"height",300,500,()=>{
 		// 		move( box,"left",300,500,()=>{
@@ -45,11 +45,11 @@
 		// 		})
 		// 	})
 		// } )
-		
+
 		function movePromise( obj,attr,target,duration ){
 			return new Promise( (res,rej)=>{
 				var b = parseInt(getComputedStyle(obj)[attr]);
-				var c = target - b; 
+				var c = target - b;
 				var d = duration;
 				var temp = new Date().getTime();
 				var timer = setInterval( function(){
