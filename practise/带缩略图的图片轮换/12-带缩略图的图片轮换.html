@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>12-带缩略图的图片轮换</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        h1 {
+            color: white;
+            line-height: 80px;
+            margin-left: 80px;
+        }
+
+        .main {
+            background-image: url("img/bg.jpg");
+            width: 800px;
+            height: 800px;
+            margin: 10px auto;
+        }
+
+        .image {
+            position: relative;
+        }
+
+        .arrow {
+            width: 50px;
+            height: 50px;
+        }
+
+        .arrow-left {
+            position: absolute;
+            left: 10px;
+            top: 230px;
+        }
+
+        .arrow-right {
+            position: absolute;
+            right: 10px;
+            top: 230px;
+        }
+
+        .content {
+            width: 650px;
+            height: 650px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+            width: 150px;
+            margin: 10px auto;
+        }
+
+        li {
+            display: inline-block;
+            position: relative;
+            margin: 5px;
+        }
+
+        .tip-image {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            position: absolute;
+            left: -50px;
+            top: -120px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<div class="main">
+    <h1>带缩略图的图片轮换</h1>
+    <div class="image">
+        <img id="pre" src="img/pre_arrow.png" class="arrow arrow-left"/>
+        <img id="image" src="img/01.jpg" class="content">
+        <img id="next" src="img/next_arrow.png" class="arrow arrow-right"/>
+    </div>
+    <ul>
+    </ul>
+</div>
+<script>
+let index = 0
+const pre = document.getElementById('pre')
+const image = document.getElementById('image')
+const next = document.getElementById('next')
+const ul = document.getElementsByTagName('ul')[0]
+const images = ['img/01.png', 'img/02.png', 'img/03.png', 'img/04.png', 'img/05.png']
+image.src = images[index]
+pre.onclick = function () {
+    if (index === 0) {
+        alert('已经到了第一张图片')
+        return
+    }
+    lis[index].children[1].src ='img/normal.png'
+    index--
+    image.src = images[index]
+    lis[index].children[1].src ='img/active.png'
+}
+next.onclick = function () {
+    if (index === 4) {
+        alert('已经到了最后一张图片')
+        return
+    }
+    lis[index].children[1].src ='img/normal.png'
+    index++
+    image.src = images[index]
+    lis[index].children[1].src ='img/active.png'
+}
+let li = ''
+images.forEach((item, i) => {
+    if (index === i) {
+        li = li + `<li><img src="${item}" class="tip-image"><img src="img/active.png"></li>`
+    } else {
+        li = li + `<li><img src="${item}" class="tip-image"><img src="img/normal.png"></li>`
+    }
+
+})
+ul.innerHTML = li
+const lis = document.getElementsByTagName('li')
+Array.from(lis).forEach((item, i) => {
+    item.onmouseenter = function () {
+        item.children[0].style.display = 'block'
+    }
+    item.onmouseleave = function () {
+        item.children[0].style.display = 'none'
+    }
+    item.onclick = function () {
+        lis[index].children[1].src ='img/normal.png'
+        index = i
+        lis[index].children[1].src ='img/active.png'
+        image.src = images[index]
+    }
+})
+
+</script>
+</body>
+</html>
