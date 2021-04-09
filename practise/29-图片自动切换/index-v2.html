@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            background-color: black;
+        }
+
+        #app {
+            width: 500px;
+            height: 300px;
+            margin: 100px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        ul {
+            list-style: none;
+            position: relative;
+            width: 500px;
+            height: 300px;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            display: inline-block;
+            position: absolute;
+            width: 500px;
+            height: 300px;
+        }
+
+        .bottom {
+            height: 80px;
+            width: 500px;
+            position: absolute;
+            bottom: -80px;
+            left: 0px;
+        }
+
+        .tip {
+            height: 80px;
+            width: 500px;
+            position: absolute;
+            display: inline-block;
+            background-color: black;
+            color: white;
+            opacity: 0.8;
+        }
+
+        .tip div h3 {
+            font-size: 16px;
+            line-height: 30px;
+        }
+        .tip div p {
+            font-size: 14px;
+            line-height: 20px;
+            text-indent: 2em;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li style="left:0px;">
+            <img src="img29/img5.gif"/>
+        </li>
+        <li style="left:500px;">
+            <img src="img29/img1.gif"/>
+        </li>
+        <li style="left:1000px;">
+            <img src="img29/img2.gif"/>
+        </li>
+        <li style="left:1500px;">
+            <img src="img29/img3.gif"/>
+        </li>
+        <li style="left:2000px;">
+            <img src="img29/img4.gif"/>
+        </li>
+        <li style="left:2500px;">
+            <img src="img29/img5.gif"/>
+        </li>
+    </ul>
+    <div class="bottom">
+        <div class="tip" style="left:0px;">
+            <h3>辣爸荧幕成绩单5</h3>
+            <p>辣爸荧幕成绩单《爸爸，去哪儿？》今晚又要来了，你看过这些爸爸们的电影了么？</p>
+        </div>
+        <div class="tip" style="left:500px;">
+            <h3>辣爸荧幕成绩单1</h3>
+            <p>辣爸荧幕成绩单《爸爸，去哪儿？》今晚又要来了，你看过这些爸爸们的电影了么？</p>
+        </div>
+        <div class="tip" style="left:1000px;">
+            <h3>辣爸荧幕成绩单2</h3>
+            <p>辣爸荧幕成绩单《爸爸，去哪儿？》今晚又要来了，你看过这些爸爸们的电影了么？</p>
+        </div>
+        <div class="tip" style="left:1500px;">
+            <h3>辣爸荧幕成绩单3</h3>
+            <p>辣爸荧幕成绩单《爸爸，去哪儿？》今晚又要来了，你看过这些爸爸们的电影了么？</p>
+        </div>
+        <div class="tip" style="left:2000px;">
+            <h3>辣爸荧幕成绩单4</h3>
+            <p>辣爸荧幕成绩单《爸爸，去哪儿？》今晚又要来了，你看过这些爸爸们的电影了么？</p>
+        </div>
+        <div class="tip" style="left:2500px;">
+            <h3>辣爸荧幕成绩单5</h3>
+            <p>辣爸荧幕成绩单《爸爸，去哪儿？》今晚又要来了，你看过这些爸爸们的电影了么？</p>
+        </div>
+    </div>
+
+</div>
+<script>
+//promise 和函数 优化代码
+const ul = document.getElementsByTagName('ul')[0]
+const bottom = document.getElementsByClassName('bottom')[0]
+let left = 0
+let step = 20
+const stop = 4000
+let timer = 0
+let bottomOffset = -80
+let up = true
+setInterval(function () {
+    //stop 1000
+    if (left !== 0 && Math.abs(left) % 500 === 0) {
+        timer = timer + 200
+
+        if (stop === timer) {
+            timer = 0
+            bottomOffset = -80
+            left = left - 500 / step
+            ul.style.left = left + 'px'
+            bottom.style.left = left + 'px'
+            bottom.style.bottom = bottomOffset + 'px'
+        } else {
+            if (timer <= 1000 || timer >= 3000) {
+                if (bottomOffset === -80) {
+                    up = true
+                }
+                if (bottomOffset === 0) {
+                    up = false
+                }
+
+
+                if (up) {
+                    bottomOffset = bottomOffset + 16
+                } else {
+                    bottomOffset = bottomOffset - 16
+                }
+
+                bottom.style.bottom = bottomOffset + 'px'
+            }
+
+        }
+    } else {
+        if (left <= -2500) {
+            left = 0
+        } else {
+            left = left - 500 / step
+        }
+
+        ul.style.left = left + 'px'
+        bottom.style.left = left + 'px'
+    }
+}, 2000 / step)
+
+</script>
+</body>
+</html>
