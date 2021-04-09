@@ -37,10 +37,6 @@
             display: none;
         }
 
-        li.content .active {
-            display: block;
-        }
-
         li.content > ul {
             background-color: white;
         }
@@ -76,63 +72,6 @@
             }
         })
     }
-
-    // window.onload=function () {
-    //     const titles = document.getElementsByClassName('title')
-    //     const contents = document.getElementsByClassName('content')
-    //     for (const index in titles) {
-    //         if(!titles.hasOwnProperty(index)){
-    //             continue
-    //         }
-    //
-    //         titles[index].addEventListener('click', function () {
-    //             this.index = index
-    //             for (const index in titles){
-    //                 if(!titles.hasOwnProperty(index)){
-    //                     continue
-    //                 }
-    //
-    //                 if (this.index == index) {
-    //                     titles[index].style['backgroundColor'] = 'yellow'
-    //                 } else {
-    //                     titles[index].style['backgroundColor'] = '#5683EA'
-    //                 }
-    //             }
-    //             for (const index in contents) {
-    //                 if(!contents.hasOwnProperty(index)){
-    //                     continue
-    //                 }
-    //                 if(this.index == index){
-    //                     contents[index].style['display'] = 'block'
-    //                 }else{
-    //                     contents[index].style['display'] = 'none'
-    //                 }
-    //             }
-    //         }, false)
-    //     }
-    // }
-
-
-    // function selectItem(element) {
-    //     const titles = document.getElementsByClassName('title')
-    //     for (let i = 0; i < titles.length; i++) {
-    //         let item = titles[i]
-    //         if (item == element) {
-    //             item.style['backgroundColor'] = 'yellow'
-    //         } else {
-    //             item.style['backgroundColor'] = '#5683EA'
-    //         }
-    //     }
-    //     const contents = document.getElementsByClassName('content')
-    //     for (let i = 0; i < contents.length; i++) {
-    //         let item = contents[i]
-    //         if (item == element.nextSibling.nextSibling) {
-    //             item.style['display'] = 'block'
-    //         } else {
-    //             item.style['display'] = 'none'
-    //         }
-    //     }
-    // }
     </script>
 </head>
 <body>
