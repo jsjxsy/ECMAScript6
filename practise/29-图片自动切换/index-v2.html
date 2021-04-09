@@ -59,6 +59,7 @@
             font-size: 16px;
             line-height: 30px;
         }
+
         .tip div p {
             font-size: 14px;
             line-height: 20px;
@@ -121,56 +122,80 @@
 //promise 和函数 优化代码
 const ul = document.getElementsByTagName('ul')[0]
 const bottom = document.getElementsByClassName('bottom')[0]
-let left = 0
-let step = 20
-const stop = 4000
-let timer = 0
-let bottomOffset = -80
-let up = true
-setInterval(function () {
-    //stop 1000
-    if (left !== 0 && Math.abs(left) % 500 === 0) {
-        timer = timer + 200
+// let left = 0
+// let step = 20
+// const stop = 4000
+// let timer = 0
+// let bottomOffset = -80
+// let up = true
+// setInterval(function () {
+//     //stop 1000
+//     if (left !== 0 && Math.abs(left) % 500 === 0) {
+//         timer = timer + 200
+//
+//         if (stop === timer) {
+//             timer = 0
+//             bottomOffset = -80
+//             left = left - 500 / step
+//             ul.style.left = left + 'px'
+//             bottom.style.left = left + 'px'
+//             bottom.style.bottom = bottomOffset + 'px'
+//         } else {
+//             if (timer <= 1000 || timer >= 3000) {
+//                 if (bottomOffset === -80) {
+//                     up = true
+//                 }
+//                 if (bottomOffset === 0) {
+//                     up = false
+//                 }
+//
+//
+//                 if (up) {
+//                     bottomOffset = bottomOffset + 16
+//                 } else {
+//                     bottomOffset = bottomOffset - 16
+//                 }
+//
+//                 bottom.style.bottom = bottomOffset + 'px'
+//             }
+//
+//         }
+//     } else {
+//         if (left <= -2500) {
+//             left = 0
+//         } else {
+//             left = left - 500 / step
+//         }
+//
+//         ul.style.left = left + 'px'
+//         bottom.style.left = left + 'px'
+//     }
+// }, 2000 / step)
 
-        if (stop === timer) {
-            timer = 0
-            bottomOffset = -80
-            left = left - 500 / step
-            ul.style.left = left + 'px'
-            bottom.style.left = left + 'px'
-            bottom.style.bottom = bottomOffset + 'px'
-        } else {
-            if (timer <= 1000 || timer >= 3000) {
-                if (bottomOffset === -80) {
-                    up = true
-                }
-                if (bottomOffset === 0) {
-                    up = false
-                }
-
-
-                if (up) {
-                    bottomOffset = bottomOffset + 16
-                } else {
-                    bottomOffset = bottomOffset - 16
-                }
-
-                bottom.style.bottom = bottomOffset + 'px'
+function movePromise(obj, attr, target, duration) {
+    return new Promise((res, rej) => {
+        let b = parseInt(getComputedStyle(obj)[attr])
+        let c = target - b
+        let d = duration
+        let temp = new Date().getTime()
+        let timer = setInterval(function () {
+            let t = new Date().getTime() - temp
+            if (t >= d) {
+                clearInterval(timer)
+                t = d
             }
+            let v = c / d * t + b
+            obj.style[attr] = v + 'px'
+            if (t === d) {
+                res('success')
+            }
+        }, 20)
+    })
+}
 
-        }
-    } else {
-        if (left <= -2500) {
-            left = 0
-        } else {
-            left = left - 500 / step
-        }
-
-        ul.style.left = left + 'px'
-        bottom.style.left = left + 'px'
-    }
-}, 2000 / step)
-
+movePromise(ul, 'left', -500, 2000)
+    .then(() => movePromise(bottom, 'bottom', 0, 2000))
+    .then(() => movePromise(bottom, 'bottom', -80, 2000))
 </script>
 </body>
 </html>
