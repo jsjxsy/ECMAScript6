@@ -40,16 +40,11 @@
 				},20 )
 			} )
 		}
-		// movePromise( box,"width",200,500 )
-		// .then( ()=>movePromise( box,"height",300,1000 ) )
-		// .then( ()=>movePromise( box,"left",300,1000 ) )
-		// .then( ()=>movePromise( box,"top",200,1000 ) )
-		// .then( ()=>console.log( "done" ) )
-		const p1 = movePromise( box,"width",200,500 )
-		const p2 = movePromise( box,"height",300,1000 )
-		const p3 = movePromise( box,"left",300,1000 )
-		const p4 = movePromise( box,"top",200,1000 )
-		console.log(Promise.all([p1, p2, p3, p4]))
+		movePromise( box,"width",200,500 )
+		.then( ()=>movePromise( box,"height",300,1000 ) )
+		.then( ()=>movePromise( box,"left",300,1000 ) )
+		.then( ()=>movePromise( box,"top",200,1000 ) )
+		.then( ()=>console.log( "done" ) )
 	</script>
 </body>
 </html>

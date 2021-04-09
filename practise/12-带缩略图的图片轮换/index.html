@@ -85,24 +85,45 @@
     <ul>
     </ul>
 </div>
-<script type="module">
-import ImagePreviewer from './ImagePreviewer.js'
+<script>
+let currentIndex = 0
 const pre = document.getElementById('pre')
 const image = document.getElementById('image')
 const next = document.getElementById('next')
-
 const ul = document.getElementsByTagName('ul')[0]
-const imagePreviewer = new ImagePreviewer()
-imagePreviewer.initView(ul)
-const lis = document.getElementsByTagName('li')
-imagePreviewer.LIArray = lis
+const images = ['img/01.png', 'img/02.png', 'img/03.png', 'img/04.png', 'img/05.png']
+image.src = images[currentIndex]
 pre.onclick = function () {
-    imagePreviewer.pre()
+    if (currentIndex === 0) {
+        alert('已经到了第一张图片')
+        return
+    }
+    lis[currentIndex].children[1].src = 'img/normal.png'
+    currentIndex--
+    image.src = images[currentIndex]
+    lis[currentIndex].children[1].src = 'img/active.png'
 }
 next.onclick = function () {
-    imagePreviewer.next()
+    if (currentIndex === 4) {
+        alert('已经到了最后一张图片')
+        return
+    }
+    lis[currentIndex].children[1].src = 'img/normal.png'
+    currentIndex++
+    image.src = images[currentIndex]
+    lis[currentIndex].children[1].src = 'img/active.png'
 }
+let li = ''
+images.forEach((item, i) => {
+    if (currentIndex === i) {
+        li = li + `<li><img src="${item}" class="tip-image"><img src="img/active.png"></li>`
+    } else {
+        li = li + `<li><img src="${item}" class="tip-image"><img src="img/normal.png"></li>`
+    }
 
+})
+ul.innerHTML = li
+const lis = document.getElementsByTagName('li')
 Array.from(lis).forEach((item, i) => {
     item.onmouseenter = function () {
         item.children[0].style.display = 'block'
@@ -111,62 +132,12 @@ Array.from(lis).forEach((item, i) => {
         item.children[0].style.display = 'none'
     }
     item.onclick = function () {
-        imagePreviewer.current(i)
+        lis[currentIndex].children[1].src = 'img/normal.png'
+        currentIndex = i
+        lis[currentIndex].children[1].src = 'img/active.png'
+        image.src = images[currentIndex]
     }
 })
-
-// let currentIndex = 0
-// const pre = document.getElementById('pre')
-// const image = document.getElementById('image')
-// const next = document.getElementById('next')
-// const ul = document.getElementsByTagName('ul')[0]
-// const images = ['img/01.png', 'img/02.png', 'img/03.png', 'img/04.png', 'img/05.png']
-// image.src = images[currentIndex]
-// pre.onclick = function () {
-//     if (currentIndex === 0) {
-//         alert('已经到了第一张图片')
-//         return
-//     }
-//     lis[currentIndex].children[1].src ='img/normal.png'
-//     currentIndex--
-//     image.src = images[currentIndex]
-//     lis[currentIndex].children[1].src ='img/active.png'
-// }
-// next.onclick = function () {
-//     if (currentIndex === 4) {
-//         alert('已经到了最后一张图片')
-//         return
-//     }
-//     lis[currentIndex].children[1].src ='img/normal.png'
-//     currentIndex++
-//     image.src = images[currentIndex]
-//     lis[currentIndex].children[1].src ='img/active.png'
-// }
-// let li = ''
-// images.forEach((item, i) => {
-//     if (currentIndex === i) {
-//         li = li + `<li><img src="${item}" class="tip-image"><img src="img/active.png"></li>`
-//     } else {
-//         li = li + `<li><img src="${item}" class="tip-image"><img src="img/normal.png"></li>`
-//     }
-//
-// })
-// ul.innerHTML = li
-// const lis = document.getElementsByTagName('li')
-// Array.from(lis).forEach((item, i) => {
-//     item.onmouseenter = function () {
-//         item.children[0].style.display = 'block'
-//     }
-//     item.onmouseleave = function () {
-//         item.children[0].style.display = 'none'
-//     }
-//     item.onclick = function () {
-//         lis[currentIndex].children[1].src ='img/normal.png'
-//         currentIndex = i
-//         lis[currentIndex].children[1].src ='img/active.png'
-//         image.src = images[currentIndex]
-//     }
-// })
 </script>
 </body>
 </html>

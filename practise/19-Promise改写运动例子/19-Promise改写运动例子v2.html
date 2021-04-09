@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		#box{
+			width: 100px;
+			height: 100px;
+			background: #f00;
+			position: absolute;
+			left: 0;
+			top: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<script>
+		const box = document.getElementById( 'box' );
+		function movePromise( obj,attr,target,duration ){
+			return new Promise( (res,rej)=>{
+				let b = parseInt(getComputedStyle(obj)[attr]);
+				let c = target - b;
+				let d = duration;
+				let temp = new Date().getTime();
+				let timer = setInterval( function(){
+					let t = new Date().getTime()-temp;
+					if( t >= d ){
+						clearInterval( timer );
+						t = d;
+					}
+					let v = c/d*t+b ;
+					obj.style[attr] = v + "px";
+					if( t === d ){
+						res("success")
+					}
+				},20 )
+			} )
+		}
+		const p1 = movePromise( box,"width",200,500 )
+		const p2 = movePromise( box,"height",300,1000 )
+		const p3 = movePromise( box,"left",300,1000 )
+		const p4 = movePromise( box,"top",200,1000 )
+		console.log(Promise.all([p1, p2, p3, p4]))
+	</script>
+</body>
+</html>

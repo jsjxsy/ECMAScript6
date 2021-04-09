@@ -1,6 +1,6 @@
 export default class ImagePreviewer {
     constructor() {
-        this.images = Array('img/01.png', 'img/02.png', 'img/03.png', 'img/04.png', 'img/05.png')
+        this.images = Array('../img/01.png', '../img/02.png', '../img/03.png', '../img/04.png', '../img/05.png')
         this.currentIndex = 0
     }
 
@@ -16,9 +16,9 @@ export default class ImagePreviewer {
         let li = ''
         this.images.forEach((item, i) => {
             if (this.currentIndex === i) {
-                li = li + `<li><img src="${item}" class="tip-image"><img src="img/active.png"></li>`
+                li = li + `<li><img src="${item}" class="tip-image"><img src="../img/active.png"></li>`
             } else {
-                li = li + `<li><img src="${item}" class="tip-image"><img src="img/normal.png"></li>`
+                li = li + `<li><img src="${item}" class="tip-image"><img src="../img/normal.png"></li>`
             }
 
         })
@@ -33,10 +33,10 @@ export default class ImagePreviewer {
             alert('已经到了第一张图片')
             return
         }
-        this.lis[this.currentIndex].children[1].src = 'img/normal.png'
+        this.lis[this.currentIndex].children[1].src = '../img/normal.png'
         this.currentIndex--
         image.src = this.images[this.currentIndex]
-        this.lis[this.currentIndex].children[1].src = 'img/active.png'
+        this.lis[this.currentIndex].children[1].src = '../img/active.png'
     }
 
     next() {
@@ -44,10 +44,10 @@ export default class ImagePreviewer {
             alert('已经到了最后一张图片')
             return
         }
-        this.lis[this.currentIndex].children[1].src = 'img/normal.png'
+        this.lis[this.currentIndex].children[1].src = '../img/normal.png'
         this.currentIndex++
         image.src = this.images[this.currentIndex]
-        this.lis[this.currentIndex].children[1].src = 'img/active.png'
+        this.lis[this.currentIndex].children[1].src = '../img/active.png'
     }
 
     /**
@@ -55,9 +55,9 @@ export default class ImagePreviewer {
      * @param int
      */
     current(index) {
-        this.lis[this.currentIndex].children[1].src = 'img/normal.png'
+        this.lis[this.currentIndex].children[1].src = '../img/normal.png'
         this.currentIndex = index
-        this.lis[this.currentIndex].children[1].src = 'img/active.png'
+        this.lis[this.currentIndex].children[1].src = '../img/active.png'
         image.src = this.images[this.currentIndex]
     }
 
